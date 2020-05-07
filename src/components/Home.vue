@@ -35,11 +35,14 @@
               xs12
               sm6
               lg3
+              pl-5
+              pr-5
               v-for="image in images"
               v-bind:key="image.id"
             >
               <v-card>
                 <v-img
+                  class="white--text"
                   height="200px"
                   :src="image.url"
                 >
@@ -52,7 +55,7 @@
                   </div>
                 </v-card-title>
                 <v-card-actions>
-                  <v-btn flat @click="goToImageDetail($image.id)">Explore</v-btn>
+                  <v-btn text @click="goToImageDetail(image.id)">Explore</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -91,8 +94,8 @@ import { storage } from '@/main'
           firestore.collection('images').add(image)
         })
       },
-      goToImageDetail: function() {
-        // this.$router.push({ path: '/image/${id}'})
+      goToImageDetail: function(id) {
+        this.$router.push({ path: '/image/' + id})
       }
     },
     firestore() {
@@ -101,6 +104,5 @@ import { storage } from '@/main'
         images: firestore.collection('images')
       }
     }
-    
   }
 </script>
