@@ -40,9 +40,8 @@
             >
               <v-card>
                 <v-img
-                  class="white--text"
                   height="200px"
-                  :src="image.id"
+                  :src="image.url"
                 >
                 </v-img>
                 <v-card-title>
@@ -92,9 +91,8 @@ import { storage } from '@/main'
           firestore.collection('images').add(image)
         })
       },
-      goToImageDetail: function(id) {
-        let id1 = id
-        this.$router.push({ path: '/image/${id1}'})
+      goToImageDetail: function() {
+        // this.$router.push({ path: '/image/${id}'})
       }
     },
     firestore() {
