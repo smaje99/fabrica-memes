@@ -17,11 +17,14 @@
                         height="200px"
                         :src="image.url"
                     ></v-img>
-                    <v-card-title>
+                    <v-card-title v-if="image">
                         <div>
                             <span class="grey--text"> {{image.name}} </span>
-                            <v-chip> {{image.scorePromedio}} </v-chip>
+                            <v-chip :color="selectClass"> 
+                                ({{ image.scorePromedio | trimScore }}) 
+                            </v-chip>
                             <br>
+                            <span>{{ image.labels | separateLabels }}</span>
                         </div>
                     </v-card-title>
                 </v-card>
@@ -91,6 +94,12 @@
             return {
                 image: firestore.collection('images').doc(this.id),
                 comentarios: firestore.collection('comentarios').where("imageId", "==", this.id)
+            }
+        },
+        
+        filters: {
+            separateLabels: function(value) {
+                return value[0] + ', ' + value[1] + ', ' + value[2]
             }
         }
     }
