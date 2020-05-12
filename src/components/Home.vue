@@ -37,6 +37,8 @@
               lg3
               pl-5
               pr-5
+              pt-5
+              pb-5
               v-for="image in images"
               v-bind:key="image.id"
             >
