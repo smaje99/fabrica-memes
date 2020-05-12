@@ -75,7 +75,7 @@ import axios from 'axios'
   export default {
     name: 'Home',
     data: () => ({
-      apiKey: 'AIzaSyA4IOCjMz2b0Thw1BLWmt0q2wUUHWeWcms',
+      apiKey: fetch("credentials.json").then(e => e.json).keyFirebase,
       file: '',
       images: []
     }),
