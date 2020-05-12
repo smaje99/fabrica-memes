@@ -20,4 +20,4 @@ yarn-error.log*
 *.sln
 *.sw?
 
-credentials.json
+src/credentials/credentials.js
