@@ -50,14 +50,13 @@
                 >
                 </v-img>
                 <v-card-title>
-                  <div style="height: 100px;">
+                  <div style="he">
                     <div>
                       <span class="grey--text"> {{image.name}} </span>
                       <v-chip> {{image.scorePromedio}} </v-chip>
                       <br>
                       <span>{{ image.labels | separateLabels }}</span>
                     </div>
-                  </div>  
                 </v-card-title>
                 <v-card-actions>
                   <v-btn flat @click="goToImageDetail(image.id)">Explore</v-btn>

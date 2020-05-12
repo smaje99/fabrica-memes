@@ -57,7 +57,7 @@
                       <br>
                       <span>{{ image.labels | separateLabels }}</span>
                     </div>
-                  </div>  
+                    
                 </v-card-title>
                 <v-card-actions>
                   <v-btn flat @click="goToImageDetail(image.id)">Explore</v-btn>
