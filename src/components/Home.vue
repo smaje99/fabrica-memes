@@ -87,7 +87,8 @@ import axios from 'axios'
         this.file = event.target.files[0]
       },
       uploadFile: function() {
-        let name = (+new Date()) + '-' + this.file.name
+        // let name = (+new Date()) + '-' + this.file.name
+        let name = this.file.name
         let metadata = { contentType: this.file.type }
         storage.child(name).put(this.file, metadata)
         .then(snapshot => snapshot.ref.getDownloadURL())
