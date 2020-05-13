@@ -69,9 +69,13 @@
 <script>
     import { firestore } from "@/main";
     // import { storage } from "@/main";
+    import { keyFirebase } from '@/credentials/credentials';
+    import axios from 'axios';
+
     export default {
         data () {
             return {
+                apiKey: keyFirebase,
                 id: this.$route.params.id,
                 image: '',
                 comentario: '',
@@ -80,14 +84,43 @@
         },
         methods: {
             enviarComentario: function() {
-                let comentario = {
-                    imageId: this.id,
-                    texto: this.comentario,
-                    createdAt: (+new Date()),
-                    score: 0
+                const data = {
+                    "document": {
+                        "type": "PLAIN_TEXT",
+                        "lenguage": "ES",
+                        "content": this.comentario
+                    },
+                    "encodignType": "UTF8"
                 }
-                firestore.collection('comentarios').add(comentario)
-                this.comentario = ''
+                    
+                axios.post(
+                    'https://language.googleapis.com/v1/documents:analyzeSentiment?key=${{this.apikey}}',
+                    data
+                )
+                .then(response => {
+                    const score = response.data.documentSentiment.score
+                    let comentario = {
+                        imageId: this.id,
+                        texto: this.comentario,
+                        createdAt: (+new Date()),
+                        score: score
+                    }
+                    firestore.collection('comentarios').add(comentario).then(response => {
+                        const length = this.comentarios.length
+                        let scorePromedio = 0
+                        this.comentarios.forEach(function(comentario) {
+                            scorePromedio = scorePromedio + comentario.score
+                        })
+                        scorePromedio = scorePromedio / length
+
+                        // Update scorePromedio de la imagen
+                        firestore.collection("images").doc(this.id).set({
+                            scorePromedio: scorePromedio
+                        }, {merge: true})
+                        this.comentario = response
+                        this.comentario = ''
+                    })
+                })    
             }
         },
         firestore () {
