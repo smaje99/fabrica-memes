@@ -94,7 +94,7 @@
                     "encodignType": "UTF8"
                 }
                     
-                axios.post('https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=' + this.apiKey, data)
+                axios.post('https://language.googleapis.com/v1/documents:analyzeSentiment?key=' + this.apiKey, data)
                 .catch(error => {
                     console.log(error.message)
                 })
