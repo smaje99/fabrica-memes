@@ -56,7 +56,7 @@
                     <v-flex x12>
                         <v-text-field
                             :value="comentario.texto"
-                            :label="comentario.score"
+                            :label="comentario.score.toString()"
                             readonly
                         ></v-text-field>
                     </v-flex>
@@ -88,13 +88,16 @@
                 const data = {
                     "document": {
                         "type": "PLAIN_TEXT",
-                        "lenguage": "ES",
+                        "language": "ES",
                         "content": this.comentario
                     },
-                    "encodignType": "UTF8"
+                    "encodingType": "UTF8"
                 }
                     
-                axios.post('https://language.googleapis.com/v1/documents:analyzeSentiment?key=' + this.apiKey, data)
+                axios.post(
+                    'https://language.googleapis.com/v1/documents:analyzeSentiment?key=' + this.apiKey, 
+                    data
+                )
                 .catch(error => {
                     console.log(error.message)
                 })
