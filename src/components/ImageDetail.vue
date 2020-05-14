@@ -1,6 +1,8 @@
 <template>
     <v-container>
         <v-layout
+            xs12
+            pl-2
             row
             wrap
             align-center
@@ -20,9 +22,7 @@
                     <v-card-title v-if="image">
                         <div>
                             <span class="grey--text"> {{image.name}} </span>
-                            <v-chip :color="selectClass"> 
-                                ({{ image.scorePromedio | trimScore }}) 
-                            </v-chip>
+                            <v-chip :color="selectClass">{{ image.scorePromedio }}</v-chip>
                             <br>
                             <span>{{ image.labels | separateLabels }}</span>
                         </div>
@@ -67,15 +67,16 @@
 </template>
 
 <script>
-    import { firestore } from "@/main";
-    // import { storage } from "@/main";
-    import { keyFirebase } from '@/credentials/credentials';
-    import axios from 'axios';
+    import { firestore } from "@/main"
+    // import { storage } from "@/main"
+    import { keyNLP } from '@/credentials/credentials'
+    import axios from 'axios'
 
     export default {
+        name: 'ImageDetail',
         data () {
             return {
-                apiKey: keyFirebase,
+                apiKey: keyNLP,
                 id: this.$route.params.id,
                 image: '',
                 comentario: '',
@@ -93,10 +94,10 @@
                     "encodignType": "UTF8"
                 }
                     
-                axios.post(
-                    'https://language.googleapis.com/v1/documents:analyzeSentiment?key=${{this.apikey}}',
-                    data
-                )
+                axios.post('https://language.googleapis.com/v1beta2/documents:analyzeSentiment?key=' + this.apiKey, data)
+                .catch(error => {
+                    console.log(error.message)
+                })
                 .then(response => {
                     const score = response.data.documentSentiment.score
                     let comentario = {
@@ -105,7 +106,7 @@
                         createdAt: (+new Date()),
                         score: score
                     }
-                    firestore.collection('comentarios').add(comentario).then(response => {
+                    firestore.collection('comentarios').add(comentario).then(() => {
                         const length = this.comentarios.length
                         let scorePromedio = 0
                         this.comentarios.forEach(function(comentario) {
@@ -117,7 +118,6 @@
                         firestore.collection("images").doc(this.id).set({
                             scorePromedio: scorePromedio
                         }, {merge: true})
-                        this.comentario = response
                         this.comentario = ''
                     })
                 })    

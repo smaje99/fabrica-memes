@@ -72,13 +72,13 @@
 <script>
 import { firestore } from '@/main'
 import { storage } from '@/main'
-import { keyFirebase } from '@/credentials/credentials'
+import { keyVision } from '@/credentials/credentials'
 import axios from 'axios'
 
   export default {
     name: 'Home',
     data: () => ({
-      apiKey: keyFirebase,
+      apiKey: keyVision,
       file: '',
       images: []
     }),
