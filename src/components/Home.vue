@@ -52,7 +52,7 @@
                 <v-card-title>
                   <div style="height: 100px;">
                     <span class="grey--text"> {{image.name}} </span>
-                    <v-chip> {{image.scorePromedio}} </v-chip>
+                    <v-chip :color="selectClass(image.scorePromedio)">{{ image.scorePromedio | trimScore }}</v-chip>
                     <br>
                     <span>{{ image.labels | separateLabels }}</span>
                   </div>  
@@ -130,6 +130,15 @@ import axios from 'axios'
       },
       goToImageDetail: function(id) {
         this.$router.push({ path: '/image/' + id})
+      },
+      selectClass: function(score) {
+        if (score > 0.25) {
+          return "success"
+        } else if (score < -0.25) {
+          return "red"
+        } else {
+          return "warning"
+        }
       }
     },
     firestore() {
@@ -141,7 +150,11 @@ import axios from 'axios'
     filters: {
       separateLabels: function(value) {
         return value[0] + ', ' + value[1] + ', ' + value[2]
+      },
+      trimScore: function(value) {
+        return Number(value.toString().slice(0, 5))
       }
     }
+      
   }
 </script>

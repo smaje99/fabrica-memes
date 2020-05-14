@@ -22,7 +22,7 @@
                     <v-card-title v-if="image">
                         <div>
                             <span class="grey--text"> {{image.name}} </span>
-                            <v-chip :color="selectClass">{{ image.scorePromedio }}</v-chip>
+                            <v-chip :color="selectClass">{{ image.scorePromedio | trimScore }}</v-chip>
                             <br>
                             <span>{{ image.labels | separateLabels }}</span>
                         </div>
@@ -56,7 +56,7 @@
                     <v-flex x12>
                         <v-text-field
                             :value="comentario.texto"
-                            :label="comentario.score.toString()"
+                            :label="comentario.score"
                             readonly
                         ></v-text-field>
                     </v-flex>
@@ -136,6 +136,21 @@
         filters: {
             separateLabels: function(value) {
                 return value[0] + ', ' + value[1] + ', ' + value[2]
+            },
+            trimScore: function(value) {
+                return Number(value.toString().slice(0, 5)).toString()
+            }
+        },
+        computed: {
+            selectClass: function() {
+                let score = this.image.scorePromedio
+                if (score > 0.25) {
+                    return "success";
+                } else if (score < -0.25) {
+                    return "red";
+                } else {
+                    return "warning";
+                }
             }
         }
     }
