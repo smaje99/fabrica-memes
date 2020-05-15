@@ -1,24 +1,9 @@
-# fabrica-memes
+# Fabrica de Memes
 
-## Project setup
-```
-npm install
-```
+Análisis predictivo acertado usando *Cloud ML* y aplicado a una aplicación FrontEnd desarrollada con *VueJS*, usando también *Firebase* como gestor de almacenamiento y base de datos.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Servicios de Cloud ML usados:
+* **Vision API**, para el procesamiento de contenido en una imagen
+* **NLP API**, para el procesamiento de sentimiento en un comentario
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Los algoritmos usados, están basados en el curso *Machine Laearning para análisis predictivo* de **Platzi**.
