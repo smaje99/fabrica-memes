@@ -4,12 +4,13 @@ import vuetify from './plugins/vuetify';
 import firebase from 'firebase'
 import { firestorePlugin } from 'vuefire'
 import router from './router/index'
+import { keyFirebase } from '@/credentials/credentials'
 
 Vue.config.productionTip = false
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: "AIzaSyCHdLrMnyrRExbj5E-3qUSG4ay7A88htTs",
+  apiKey: keyFirebase,
   authDomain: "fabrica-memes-a7f72.firebaseapp.com",
   databaseURL: "https://fabrica-memes-a7f72.firebaseio.com",
   projectId: "fabrica-memes-a7f72",
