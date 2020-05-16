@@ -1,5 +1,9 @@
 # Fabrica de Memes
 
+Análisis predictivo del contenido y sentimiento que genera un meme
+
+## Desarrollo
+
 Análisis predictivo acertado usando *Cloud ML* y aplicado a una aplicación FrontEnd desarrollada con *VueJS*, usando también *Firebase* como gestor de almacenamiento y base de datos.
 
 Servicios de Cloud ML usados:
