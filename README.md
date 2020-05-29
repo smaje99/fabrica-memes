@@ -1,6 +1,6 @@
 # Fabrica de Memes
 
-Análisis predictivo del contenido y sentimiento que genera un meme
+Análisis predictivo del contenido y sentimiento que genera un meme en una página Responsive Web Design
 
 ## Desarrollo
 
